@@ -1,0 +1,77 @@
+##TODO: update environment variables in settings.json
+
+###
+# Testing host endpoint
+GET {{host}} 
+
+###
+
+# Register user and get authorization token
+POST {{host}}/api/users
+Content-Type: application/json
+
+{
+    "name": "John",
+    "email": "john@user.com",
+    "password": {{password}}
+}
+
+###
+
+# Login user
+POST {{host}}/api/auth
+Content-Type: application/json
+
+{
+   "email": "john@user.com",
+   "password": {{password}}
+}
+
+###
+
+# Get logged in user
+GET {{host}}/api/auth
+x-auth-token: {{token}}
+
+###
+
+# Get contacts of user
+GET {{host}}/api/contacts
+Accept: application/json
+x-auth-token: {{token}}
+
+###
+
+# Add new contact
+POST {{host}}/api/contacts
+Content-Type: application/json
+x-auth-token: {{token}}
+
+{
+    "name": "Mike",
+    "email": "Mike@contact.com",
+    "phone": "+853 58282828",
+    "type": "professional"
+}
+
+###
+
+# Update contact
+# todo: update path with contact id
+PUT {{host}}/api/contacts/{{contact_id}}    
+Content-Type: application/json
+x-auth-token: {{token}}
+
+{
+    "name": "Andy Changed",
+    "email": "andy123@contact.com",
+    "phone": "+852 28282828",
+    "type": "professional"
+}
+
+###
+
+# Delete contact
+# todo: update path with contact id
+DELETE {{host}}/api/contacts/{{contact_id}}    
+x-auth-token: {{token}}
